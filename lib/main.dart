@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'input_page.dart';
@@ -11,6 +12,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        sliderTheme: SliderTheme.of(context).copyWith(
+          activeTrackColor: Colors.white,
+          inactiveTickMarkColor: kSliderInactiveColor,
+          thumbColor: kRedPinkAccentColor,
+          overlayColor: kRedPinkAccentColor.withAlpha(26),
+          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+        ),
         primaryColor: Color(0xFF090C22),
         scaffoldBackgroundColor: Color(0xFF090C22),
         accentColor: Color(0xFFEA1556),

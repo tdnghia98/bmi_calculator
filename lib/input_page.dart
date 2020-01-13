@@ -4,11 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'reusable_card.dart';
 import 'card_child.dart';
-
-const Color inactiveCardColor = Color(0xFF101427);
-const Color activeCardColor = Color(0xFF1E1F33);
-const Color redPinkAccentColor = Color(0xFFEA1556);
-const bottomContainerHeight = 50.0;
+import 'constants.dart';
 
 enum Genre { Male, Female }
 
@@ -22,6 +18,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  int height = 180;
+  int weight = 60;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,6 +30,7 @@ class _InputPageState extends State<InputPage> {
         ),
         body: Center(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Expanded(
                 child: Row(
@@ -42,8 +42,8 @@ class _InputPageState extends State<InputPage> {
                             cardTitle: 'MALE',
                           ),
                           color: selectedGenre == Genre.Male
-                              ? activeCardColor
-                              : inactiveCardColor,
+                              ? kCardActiveColor
+                              : kCardInactiveColor,
                           onPressed: () {
                             setState(() {
                               selectedGenre = Genre.Male;
@@ -57,8 +57,8 @@ class _InputPageState extends State<InputPage> {
                             cardTitle: 'FEMALE',
                           ),
                           color: selectedGenre == Genre.Female
-                              ? activeCardColor
-                              : inactiveCardColor,
+                              ? kCardActiveColor
+                              : kCardInactiveColor,
                           onPressed: () {
                             setState(() {
                               selectedGenre = Genre.Female;
@@ -70,17 +70,77 @@ class _InputPageState extends State<InputPage> {
               ),
               Expanded(
                 child: ReusableCard(
-                  color: inactiveCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'HEIGHT',
+                        style: kLabelTextStyle,
+                      ),
+                      Row(
+                        textBaseline: TextBaseline.alphabetic,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: <Widget>[
+                          Text(
+                            height.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Text('cm', style: kLabelTextStyle)
+                        ],
+                      ),
+                      Slider(
+                        value: height.toDouble(),
+                        min: 80,
+                        max: 250,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                  color: kCardActiveColor,
                 ),
               ),
               Expanded(
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: ReusableCard(color: inactiveCardColor),
+                      child: ReusableCard(
+                        color: kCardInactiveColor,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'WEIGHT',
+                              style: kLabelTextStyle,
+                            ),
+                            Text(
+                              weight.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.plus,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Expanded(
-                      child: ReusableCard(color: inactiveCardColor),
+                      child: ReusableCard(color: kCardInactiveColor),
                     ),
                   ],
                 ),
@@ -89,20 +149,17 @@ class _InputPageState extends State<InputPage> {
                 margin: EdgeInsets.only(top: 20.0),
                 // Stretch width to full screen
                 width: double.infinity,
-                height: bottomContainerHeight,
+                height: kBottomContainerHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   ),
-                  color: redPinkAccentColor,
+                  color: kRedPinkAccentColor,
                 ),
                 child: Center(
                   child: Text(
                     'CALCULATE',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
                   ),
                 ),
               ),
@@ -110,6 +167,30 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      fillColor: Color(0xFF4C4F5E),
+      shape: CircleBorder(),
+      elevation: 6.0,
+      constraints: BoxConstraints.tightFor(
+        width: 50.0,
+        height: 50.0,
+      ),
+      child: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      onPressed: () {},
     );
   }
 }
