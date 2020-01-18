@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 
 import 'input_page.dart';
@@ -29,7 +30,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: InputPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => InputPage(),
+        '/results': (context) => ResultsPage(),
+      },
     );
   }
 }
