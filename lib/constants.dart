@@ -17,3 +17,9 @@ const kNumberTextStyle = TextStyle(
   fontSize: 30.0,
   fontWeight: FontWeight.w900,
 );
+
+const kCallToActionLabelTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 25.0,
+  fontWeight: FontWeight.w900,
+);
