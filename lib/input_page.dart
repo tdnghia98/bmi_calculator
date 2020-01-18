@@ -130,7 +130,7 @@ class _InputPageState extends State<InputPage> {
                                   icon: FontAwesomeIcons.minus,
                                   onPressed: () {
                                     setState(() {
-                                      age++;
+                                      weight++;
                                     });
                                   },
                                 ),
@@ -141,7 +141,7 @@ class _InputPageState extends State<InputPage> {
                                   icon: FontAwesomeIcons.plus,
                                   onPressed: () {
                                     setState(() {
-                                      age--;
+                                      weight--;
                                     });
                                   },
                                 ),
@@ -196,7 +196,9 @@ class _InputPageState extends State<InputPage> {
                   ],
                 ),
               ),
-              BottomButton(),
+              BottomButton(
+                onPressed: Navigator.push(context),
+              ),
             ],
           ),
         ),
