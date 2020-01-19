@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({
     @required this.onPressed,
+    @required this.buttonText,
   });
+
+  final String buttonText;
   final Function onPressed;
 
   @override
@@ -20,11 +23,12 @@ class BottomButton extends StatelessWidget {
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
-          color: kRedPinkAccentColor,
+          color: kColorRedPinkAccent,
         ),
         child: Center(
           child: Text(
-            'CALCULATE',
+            buttonText,
+            style: kTextStyleBottomButton,
           ),
         ),
       ),

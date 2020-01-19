@@ -1,11 +1,14 @@
-import 'bottom_button.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
+
+import './components/bottom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'reusable_card.dart';
+import './components/reusable_card.dart';
 import 'card_child.dart';
 import 'constants.dart';
+import 'package:bmi_calculator/logic_components/bmi_calculator.dart';
 
 enum Genre { Male, Female }
 
@@ -77,7 +80,7 @@ class _InputPageState extends State<InputPage> {
                     children: <Widget>[
                       Text(
                         'HEIGHT',
-                        style: kLabelTextStyle,
+                        style: kTextStyleLabel,
                       ),
                       Row(
                         textBaseline: TextBaseline.alphabetic,
@@ -86,9 +89,9 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             height.toString(),
-                            style: kNumberTextStyle,
+                            style: kTextStyleNumber,
                           ),
-                          Text('cm', style: kLabelTextStyle)
+                          Text('cm', style: kTextStyleLabel)
                         ],
                       ),
                       Slider(
@@ -117,11 +120,11 @@ class _InputPageState extends State<InputPage> {
                           children: <Widget>[
                             Text(
                               'WEIGHT',
-                              style: kLabelTextStyle,
+                              style: kTextStyleLabel,
                             ),
                             Text(
                               weight.toString(),
-                              style: kNumberTextStyle,
+                              style: kTextStyleNumber,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -159,11 +162,11 @@ class _InputPageState extends State<InputPage> {
                           children: <Widget>[
                             Text(
                               'AGE',
-                              style: kLabelTextStyle,
+                              style: kTextStyleLabel,
                             ),
                             Text(
                               age.toString(),
-                              style: kNumberTextStyle,
+                              style: kTextStyleNumber,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -197,8 +200,23 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
               BottomButton(
-                onPressed: Navigator.push(context),
-              ),
+                buttonText: 'CALCULATE',
+                onPressed: () {
+                  BmiCalculator calculator =
+                      BmiCalculator(height: this.height, weight: this.weight);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                        bmiScore: calculator.calculateBmiScore(),
+                        resultText: calculator.generateResult(),
+                        interpretationText: calculator.generateInterpretation(),
+                      ),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),

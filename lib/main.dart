@@ -1,7 +1,5 @@
-import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/results_page.dart';
+import './constants.dart';
 import 'package:flutter/material.dart';
-
 import 'input_page.dart';
 
 void main() => runApp(MyApp());
@@ -16,8 +14,8 @@ class MyApp extends StatelessWidget {
         sliderTheme: SliderTheme.of(context).copyWith(
           activeTrackColor: Colors.white,
           inactiveTickMarkColor: kSliderInactiveColor,
-          thumbColor: kRedPinkAccentColor,
-          overlayColor: kRedPinkAccentColor.withAlpha(26),
+          thumbColor: kColorRedPinkAccent,
+          overlayColor: kColorRedPinkAccent.withAlpha(26),
           thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
           overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
         ),
@@ -33,7 +31,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => InputPage(),
-        '/results': (context) => ResultsPage(),
       },
     );
   }

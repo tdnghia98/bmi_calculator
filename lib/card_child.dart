@@ -22,7 +22,7 @@ class CardChild extends StatelessWidget {
         ),
         Text(
           cardTitle,
-          style: kLabelTextStyle,
+          style: kTextStyleLabel,
         ),
       ],
     );
